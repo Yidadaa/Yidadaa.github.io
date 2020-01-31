@@ -22,6 +22,8 @@ jobs:
           repository: Yidadaa/Issue-Blog-With-Github-Action
           ref: source
       - name: Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install vuepress
           npm install
