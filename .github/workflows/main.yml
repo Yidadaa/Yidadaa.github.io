@@ -17,10 +17,9 @@ jobs:
         node-version: [10.x]
 
     steps:
-    - name: Pull Issue Blog
-      run: git clone --branch source https://github.com/Yidadaa/Issue-Blog-With-Github-Action.git
     - name: Build
       run: |
+        git clone --branch source https://github.com/Yidadaa/Issue-Blog-With-Github-Action.git
         cd Issue-Blog-With_Github-Action
         npm install vuepress
         npm install
