@@ -17,12 +17,14 @@ jobs:
         node-version: [10.x]
 
     steps:
-    - name: Build
-      run: |
-        git clone --branch source https://github.com/Yidadaa/Issue-Blog-With-Github-Action.git
-        cd Issue-Blog-With_Github-Action
-        npm install vuepress
-        npm install
-        npm run action
-        npm run build
-        npm run deploy
+      - uses: actions/checkout@v2
+        with:
+          repository: Yidadaa/Issue-Blog-With-Github-Action
+          ref: source
+      - name: Build
+        run: |
+          npm install vuepress
+          npm install
+          npm run action
+          npm run build
+          npm run deploy
