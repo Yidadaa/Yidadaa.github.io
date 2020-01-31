@@ -5,7 +5,7 @@ on:
     branches:
       - master
   issues:
-    types: [opened, edited, milestoned]
+    types: [opened, closed, edited, milestoned, labeled, unlabeled, reopened, demilestoned]
 
 jobs:
   build:
