@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  issues:
+    types: [opened, edited, milestoned]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - name: Pull Issue Blog
+      run: git clone --branch source https://github.com/Yidadaa/Issue-Blog-With-Github-Action.git
+    - name: Build
+      run: |
+        cd Issue-Blog-With_Github-Action
+        npm install vuepress
+        npm install
+        npm run action
+        npm run build
+        npm run deploy
