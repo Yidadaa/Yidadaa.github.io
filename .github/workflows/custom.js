@@ -51,6 +51,10 @@ let mainConfig = {
       {
         name: "ycjgg",
         link: "https://ycjgg.github.io"
+      },
+      {
+        name: "水厂博客",
+        link: "https://blog.ch34k.xyz"
       }
     ],
     extraFooters: [
