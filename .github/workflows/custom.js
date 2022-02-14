@@ -14,7 +14,8 @@ let mainConfig = {
     owner: "Yidadaa",
     repo: "Yidadaa.github.io",
     pushBranch: "master",
-    email: "yidadaa@qq.com"
+    email: "yidadaa@qq.com",
+    filterUsers: ['Yidadaa'],
   },
 
   title: "YiFei Zhang's Blog",
