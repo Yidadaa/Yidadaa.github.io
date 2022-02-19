@@ -19,11 +19,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: Yidadaa/Issue-Blog-With-Github-Action
-          ref: source
+          ref: v2
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          wget https://raw.githubusercontent.com/Yidadaa/Yidadaa.github.io/master/.github/workflows/resume.json -O ./config/resume.json
           wget https://raw.githubusercontent.com/Yidadaa/Yidadaa.github.io/master/.github/workflows/custom.js -O ./src/.vuepress/custom.js
           npm install vuepress
           npm install
