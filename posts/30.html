@@ -1,0 +1,600 @@
+<!doctype html>
+<html data-n-head-ssr>
+  <head>
+    <title>Rust 新手错误和最差实践</title><meta data-n-head="ssr" name="referrer" content="no-referrer-when-downgrade"><base href="/"><link data-n-head="ssr" rel="icon" type="image/png" href="https://avatars2.githubusercontent.com/u/16968934?s=460&v=4"><link data-n-head="ssr" rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"><link data-n-head="ssr" rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@10.5.0/styles/github.css"><script data-n-head="ssr" charset="utf-8" src="//cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js" async></script><link rel="preload" href="/_nuxt/dd67cf1.js" as="script"><link rel="preload" href="/_nuxt/82e603f.js" as="script"><link rel="preload" href="/_nuxt/b6b94c7.js" as="script"><link rel="preload" href="/_nuxt/756580a.js" as="script"><link rel="preload" href="/_nuxt/edf9d0f.js" as="script"><style data-vue-ssr-id="019e1cef:0 df718868:0 670b307b:0 13cf0b4a:0">.nuxt-progress{position:fixed;top:0;left:0;right:0;height:2px;width:0;opacity:1;transition:width .1s,opacity .4s;background-color:#000;z-index:999999}.nuxt-progress.nuxt-progress-notransition{transition:none}.nuxt-progress-failed{background-color:red}.clearfix:after,.vssue .vssue-new-comment .vssue-new-comment-footer:after{display:block;clear:both;content:""}.vssue{width:100%;color:#2c3e50;font-size:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";padding:10px}.vssue .vssue-button{outline:0;cursor:pointer;padding:10px 20px;font-size:1.05;font-weight:700;color:#900;background-color:transparent;border:2px solid #900;border-radius:10px}.vssue .vssue-button:disabled{cursor:not-allowed;color:#eaecef;border-color:#eaecef}.vssue .vssue-button:disabled .vssue-icon{fill:#eaecef}.vssue .vssue-button:not(:disabled).vssue-button-default{color:#a3aab1;border-color:#a3aab1}.vssue .vssue-button:not(:disabled).vssue-button-primary{color:#900;border-color:#900}.vssue .vssue-icon{width:1em;height:1em;vertical-align:-.15em;fill:#900;overflow:hidden}.vssue .vssue-icon-loading{-webkit-animation:vssue-keyframe-rotation 1s linear infinite;animation:vssue-keyframe-rotation 1s linear infinite}@-webkit-keyframes vssue-keyframe-rotation{0%{transform:rotate(0)}to{transform:rotate(1turn)}}@keyframes vssue-keyframe-rotation{0%{transform:rotate(0)}to{transform:rotate(1turn)}}.vssue .fade-appear-active,.vssue .fade-enter-active{transition:all .3s ease}.vssue .fade-leave-active{transition:all .3s cubic-bezier(1,.5,.8,1)}.vssue .fade-appear,.vssue .fade-enter,.vssue .fade-leave-to{opacity:0}.vssue .vssue-notice{position:relative;z-index:100;transform:translateY(-11px)}.vssue .vssue-notice .vssue-alert{position:absolute;z-index:101;cursor:pointer;top:0;padding:10px 20px;width:100%;color:#900;border:2px solid #ff9494;border-radius:5px;background-color:#ffeded}.vssue .vssue-notice .vssue-progress{position:absolute;top:0;left:0;height:2px;background-color:#900}.vssue .vssue-status{text-align:center;padding-top:20px;padding-bottom:10px;color:#900}.vssue .vssue-status .vssue-icon{font-size:1.4em}.vssue .vssue-status .vssue-status-info{margin-top:10px;margin-bottom:10px}.vssue .vssue-header{padding-bottom:10px;border-bottom:1px solid #eaecef;margin-bottom:10px;overflow:hidden}.vssue .vssue-header .vssue-header-powered-by{float:right}.vssue .vssue-new-comment{border-bottom:1px solid #eaecef;margin-top:10px;margin-bottom:10px}.vssue .vssue-new-comment .vssue-comment-avatar{float:left;width:50px;height:50px}.vssue .vssue-new-comment .vssue-comment-avatar img{width:50px;height:50px}.vssue .vssue-new-comment .vssue-comment-avatar .vssue-icon{cursor:pointer;padding:5px;font-size:50px;fill:#757f8a}.vssue .vssue-new-comment .vssue-new-comment-body{position:relative}@media screen and (max-width:576px){.vssue .vssue-new-comment .vssue-new-comment-body{margin-left:60px}}@media screen and (min-width:577px){.vssue .vssue-new-comment .vssue-new-comment-body{margin-left:70px}}.vssue .vssue-new-comment .vssue-new-comment-body .vssue-new-comment-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}.vssue .vssue-new-comment .vssue-new-comment-footer{margin-top:10px;margin-bottom:10px}.vssue .vssue-new-comment .vssue-new-comment-footer .vssue-current-user{color:#a3aab1}.vssue .vssue-new-comment .vssue-new-comment-footer .vssue-current-user .vssue-logout{cursor:pointer;text-decoration:underline;color:#a3aab1;font-weight:400}@media screen and (max-width:576px){.vssue .vssue-new-comment .vssue-new-comment-footer{text-align:center}.vssue .vssue-new-comment .vssue-new-comment-footer .vssue-new-comment-operations{margin-top:10px}}@media screen and (min-width:577px){.vssue .vssue-new-comment .vssue-new-comment-footer{margin-left:70px;text-align:right}.vssue .vssue-new-comment .vssue-new-comment-footer .vssue-current-user{float:left}}.vssue .vssue-new-comment .vssue-new-comment-input{resize:none;outline:0;width:100%;padding:15px;font-size:16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";background-color:#ffeded;border:1px solid #eaecef;border-radius:5px}.vssue .vssue-new-comment .vssue-new-comment-input:disabled{cursor:not-allowed;background-color:#f0f2f4}.vssue .vssue-new-comment .vssue-new-comment-input:focus{background-color:#fff;border-color:#ff4d4d;box-shadow:0 0 1px 1px #ff4d4d}.vssue .vssue-new-comment .vssue-new-comment-input::-moz-placeholder{color:#a3aab1}.vssue .vssue-new-comment .vssue-new-comment-input:-ms-input-placeholder{color:#a3aab1}.vssue .vssue-new-comment .vssue-new-comment-input::placeholder{color:#a3aab1}.vssue .vssue-comments .vssue-comment{margin:15px 0}.vssue .vssue-comments .vssue-comment.vssue-comment-edit-mode .vssue-comment-main{border-color:#ff4d4d;box-shadow:0 0 1px 1px #ff4d4d}.vssue .vssue-comments .vssue-comment.vssue-comment-disabled{pointer-events:none}.vssue .vssue-comments .vssue-comment.vssue-comment-disabled .vssue-comment-body{background-color:#f9f9fa}.vssue .vssue-comments .vssue-comment .vssue-comment-avatar{float:left;width:50px;height:50px}.vssue .vssue-comments .vssue-comment .vssue-comment-avatar img{width:50px;height:50px}@media screen and (max-width:576px){.vssue .vssue-comments .vssue-comment .vssue-comment-body{margin-left:60px}}@media screen and (min-width:577px){.vssue .vssue-comments .vssue-comment .vssue-comment-body{margin-left:70px}}.vssue .vssue-comments .vssue-comment .vssue-comment-header{padding:10px 15px;overflow:hidden;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #eaecef;border-bottom:none}.vssue .vssue-comments .vssue-comment .vssue-comment-header .vssue-comment-created-at{float:right;cursor:default;color:#a3aab1}.vssue .vssue-comments .vssue-comment .vssue-comment-main{padding:15px;border:1px solid #eaecef}.vssue .vssue-comments .vssue-comment .vssue-comment-main .vssue-edit-comment-input{resize:none;outline:0;border:none;width:100%;background:0 0}.vssue .vssue-comments .vssue-comment .vssue-comment-footer{padding:10px 15px;overflow:hidden;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border:1px solid #eaecef;border-top:none}.vssue .vssue-comments .vssue-comment .vssue-comment-footer .vssue-comment-hint{cursor:default;color:#a3aab1}.vssue .vssue-comments .vssue-comment .vssue-comment-footer .vssue-comment-reactions .vssue-comment-reaction{cursor:pointer;display:inline-block;margin-right:8px;color:#900}.vssue .vssue-comments .vssue-comment .vssue-comment-footer .vssue-comment-operations{float:right;color:#900}.vssue .vssue-comments .vssue-comment .vssue-comment-footer .vssue-comment-operations .vssue-comment-operation{cursor:pointer;margin-left:8px}.vssue .vssue-comments .vssue-comment .vssue-comment-footer .vssue-comment-operations .vssue-comment-operation.vssue-comment-operation-muted{color:#a3aab1}.vssue .vssue-comments .vssue-comment .vssue-comment-footer .vssue-comment-operations .vssue-comment-operation.vssue-comment-operation-muted .vssue-icon{fill:#a3aab1}.vssue .vssue-pagination{cursor:default;display:flex;padding:5px;color:#a3aab1}@media screen and (max-width:576px){.vssue .vssue-pagination{flex-direction:column;justify-content:center;text-align:center}}.vssue .vssue-pagination .vssue-pagination-loading,.vssue .vssue-pagination .vssue-pagination-page,.vssue .vssue-pagination .vssue-pagination-per-page{flex:1}@media screen and (max-width:576px){.vssue .vssue-pagination .vssue-pagination-page{margin-top:10px}}@media screen and (min-width:577px){.vssue .vssue-pagination .vssue-pagination-page{text-align:right}}.vssue .vssue-pagination .vssue-pagination-select{outline:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:1px solid #ff4d4d;padding-left:.2rem;padding-right:1rem;background-color:transparent;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg%20class=%27icon%27%20viewBox=%270%200%201024%201024%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cdefs%3E%3Cstyle/%3E%3C/defs%3E%3Cpath%20d=%27M676.395%20432.896a21.333%2021.333%200%200%200-30.166%200L511.061%20568.021%20377.728%20434.645a21.333%2021.333%200%200%200-30.165%2030.166l148.394%20148.48a21.419%2021.419%200%200%200%2030.208%200l150.23-150.187a21.333%2021.333%200%200%200%200-30.208%27/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:100%}.vssue .vssue-pagination .vssue-pagination-select:disabled{cursor:not-allowed}.vssue .vssue-pagination .vssue-pagination-select:focus{background-color:#fff;box-shadow:0 0 .2px .2px #ff4d4d}.vssue .vssue-pagination .vssue-pagination-link{display:inline-block;min-width:1em;text-align:center}.vssue .vssue-pagination .vssue-pagination-link.disabled{pointer-events:none}.vssue .vssue-pagination .vssue-pagination-link:not(.disabled){color:#900;font-weight:500;cursor:pointer}.vssue,.vssue *{box-sizing:border-box}.vssue :not(.vssue-comment-content) a{cursor:pointer;font-weight:500;color:#900;text-decoration:none}.vssue :not(.vssue-comment-content) hr{display:block;height:1px;border:0;border-top:1px solid #eaecef;margin:1.2rem 0;padding:0}body{margin:0;padding:0;font-family:-apple-system,"Noto Sans","Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Source Han Sans CN","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif}.page{box-sizing:border-box;width:90%;max-width:900px;margin:auto}.loading-light{position:relative}.loading-light:after{content:"";position:absolute;height:20px;width:1000px;background-color:#fff;opacity:.4;left:-500px;-webkit-animation:fly-to-right 2s ease infinite;animation:fly-to-right 2s ease infinite}@-webkit-keyframes fly-to-right{0%{transform:translateX(0) rotate(45deg)}to{transform:translateX(1000px) rotate(45deg)}}@keyframes fly-to-right{0%{transform:translateX(0) rotate(45deg)}to{transform:translateX(1000px) rotate(45deg)}}.post-page{margin-bottom:50px}.title{display:flex;justify-content:center}.post-title{margin-top:120px;color:#333;font-weight:700;font-size:30px;position:relative;text-align:center;max-width:80%}.post-title:before{content:"“";left:-60px}.post-title:after,.post-title:before{position:absolute;font-size:55px;color:#eee}.post-title:after{content:"”";right:-60px}.post-content{word-break:break-word}.post-content .katex{font-size:16px}a{font-weight:500;color:#900;text-decoration:none}p a code{font-weight:400;color:#900}p{font-family:Georgia,"Nimbus Roman No9 L","Songti SC","Noto Serif CJK SC","Source Han Serif SC","Source Han Serif CN",STSong,"AR PL New Sung","AR PL SungtiL GB",NSimSun,SimSun,"TW\-Sung","WenQuanYi Bitmap Song","AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE",PMingLiU,MingLiU,serif}kbd{border:.15rem solid #ddd;border-bottom:.25rem solid #ddd;border-radius:.15rem;padding:0 .15em}blockquote,kbd{background:#eee}blockquote{font-size:1rem;color:#999;border-left:.2rem solid #dfe2e5;margin:1rem 0;padding:5px 10px}blockquote>p{margin:0}.post-content ol,.post-content ul,blockquote>p{font-family:Baskerville,"Times New Roman","Liberation Serif",STFangsong,FangSong,FangSong_GB2312,"CWTEX\-F",serif}.post-content ol,.post-content ul{padding-left:1.2em}strong{font-weight:600}h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.25;font-family:-apple-system,"Noto Sans","Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Source Han Sans CN","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;margin-top:50px}h1:hover .header-anchor,h2:hover .header-anchor,h3:hover .header-anchor,h4:hover .header-anchor,h5:hover .header-anchor,h6:hover .header-anchor{opacity:1}h1{font-size:2rem;display:none}h2{font-size:1.45rem;padding-bottom:.3rem}h3{font-size:1.35rem}a.header-anchor{font-size:.85em;float:left;margin-left:-.87em;padding-right:.23em;margin-top:.125em;opacity:0;color:#ddd}a.header-anchor:hover{text-decoration:none}.line-number,code,kbd{font-family:Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif}pre{border:1px solid #aaa;border-radius:5px}pre>code{background:0 0;padding:0;margin:0}code,pre{font-size:14px}code{background:#eee;padding:2px 4px;margin:0 2px;border-radius:4px}ol,p,ul{line-height:1.7}li.task-list-item{list-style:none;display:flex}li.task-list-item input[type^=checkbox]{margin:7px 9px 0 -18px}hr{border:0;border-top:1px solid #eee}table{border-collapse:collapse;margin:1rem 0;display:block;overflow-x:auto}tr{border-top:1px solid #dfe2e5}tr:nth-child(2n){background-color:#f6f8fa}td,th{border:1px solid #dfe2e5;padding:.6em 1em}img{max-width:720px;width:100%;margin:auto;display:block;border:1px solid rgba(0,0,0,.1)}@media screen{.info{display:flex;justify-content:center;align-content:center;margin:30px 0 60px;font-family:Baskerville,"Times New Roman","Liberation Serif",STFangsong,FangSong,FangSong_GB2312,"CWTEX\-F",serif}.info .author,.info .count,.info .date{margin:0 7px}}.vssue{font-family:-apple-system,"Noto Sans","Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Source Han Sans CN","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;margin-top:100px;padding:0}.vssue .vssue-header-powered-by,.vssue .vssue-pagination-page,.vssue .vssue-pagination-per-page{display:none}.vssue .vssue-new-comment{border:0}.vssue .vssue-current-user{line-height:2.5}.vssue .vssue-button-submit-comment:not(:disabled):hover{background-color:#eee}.vssue p{font-family:-apple-system,"Noto Sans","Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Source Han Sans CN","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif}.vssue .vssue-button-login{border-color:transparent!important}@media screen and (max-width:576px){p{font-family:-apple-system,"Noto Sans","Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Source Han Sans CN","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif}.post-title{max-width:100%;overflow:hidden;font-size:26px}.katex-display{overflow-x:scroll;overflow-y:hidden}.info{font-family:-apple-system,"Noto Sans","Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Source Han Sans CN","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;font-size:14px}}@media print{.page{width:100%}.title{margin-top:30%;font-family:Baskerville,Georgia,"Liberation Serif","Kaiti SC",STKaiti,"AR PL UKai CN","AR PL UKai HK","AR PL UKai TW","AR PL UKai TW MBE","AR PL KaitiM GB",KaiTi,KaiTi_GB2312,DFKai-SB,"TW\-Kai",serif;font-weight:700}.post-title:after,.post-title:before{content:""}.info{text-align:center;margin-top:40%;page-break-after:always;font-family:Baskerville,Georgia,"Liberation Serif","Kaiti SC",STKaiti,"AR PL UKai CN","AR PL UKai HK","AR PL UKai TW","AR PL UKai TW MBE","AR PL KaitiM GB",KaiTi,KaiTi_GB2312,DFKai-SB,"TW\-Kai",serif}.info .author{font-size:20px;line-height:2}.count{display:none}code{word-break:break-all}pre{page-break-inside:avoid}.footer,.vssue{display:none}}.header-wrap[data-v-249ad96f]{border-bottom:1px solid rgba(0,0,0,.05)}.header[data-v-249ad96f]{display:flex;justify-content:space-between;align-items:center;padding:20px 0}.header .left .motto[data-v-249ad96f]{font-family:Baskerville,Georgia,"Liberation Serif","Kaiti SC",STKaiti,"AR PL UKai CN","AR PL UKai HK","AR PL UKai TW","AR PL UKai TW MBE","AR PL KaitiM GB",KaiTi,KaiTi_GB2312,DFKai-SB,"TW\-Kai",serif;font-size:16px;color:#000}.header .left .nav[data-v-249ad96f]{font-size:16px;margin-top:10px;color:#900}.header .left .nav a.nav-item[data-v-249ad96f]{color:#900}.header .left .nav a.nav-item[data-v-249ad96f]:not(:last-child):after{content:"/";margin-left:10px;margin-right:10px}.header .left .nav a.nav-item[data-v-249ad96f]:hover{color:#c00}@media print{.nav[data-v-249ad96f],.right[data-v-249ad96f]{display:none}.header-wrap[data-v-249ad96f]{border:0}}@media screen and (max-width:$MQMobile){.header[data-v-249ad96f]{flex-wrap:wrap}.header .left[data-v-249ad96f]{text-align:center;margin-bottom:20px}.left[data-v-249ad96f],.right[data-v-249ad96f]{width:100%}.motto[data-v-249ad96f]{margin-bottom:20px}}.footer[data-v-2c1886a6]{background:#333;color:#fff}.footer .footer-content[data-v-2c1886a6]{padding:20px 0;display:flex;flex-wrap:wrap;justify-content:space-between;color:hsla(0,0%,100%,.6)}.footer .footer-content .power[data-v-2c1886a6]{font-style:normal}.footer .footer-content .logo[data-v-2c1886a6]{font-size:16px;padding:5px 10px;border:1px dashed #fff;display:inline-block;margin-bottom:20px;color:#fff}.footer .footer-content .logo[data-v-2c1886a6]:hover{background-color:#fff;color:#000}.footer .footer-content .footer-title[data-v-2c1886a6]{color:#fff;font-size:12px;margin-bottom:5px;font-weight:bolder;transform:scaley(.8);text-shadow:1px 1px 1px rgba(0,0,0,.4)}.footer .footer-content .footer-text[data-v-2c1886a6]{font-size:12px;margin-bottom:20px}.footer .footer-content .footer-count[data-v-2c1886a6]{font-size:12px;opacity:0;font-size:0}.footer .footer-content .links a.link[data-v-2c1886a6]{color:hsla(0,0%,100%,.6);margin-right:10px;text-decoration:underline}.footer .footer-content .links a.link[data-v-2c1886a6]:hover{background-color:#fff;color:#000}.counter[data-v-2c1886a6]{margin-bottom:10px}.counter .counter-title[data-v-2c1886a6]{color:#fff;font-size:12px;margin-bottom:5px;font-weight:bolder;transform:scaley(.8);text-shadow:1px 1px 1px rgba(0,0,0,.4)}.counter .counter-content[data-v-2c1886a6]{border-radius:2px;padding:5px 10px;background:#fff;box-shadow:inset 1px 2px 10px rgba(0,0,0,.6);border-color:#444 #555 #444 rgba(0,0,0,.6);border-style:solid;border-width:5px}.counter .counter-content .counter-number[data-v-2c1886a6]{display:inline-block;padding:3px 5px;position:relative;background:#333;color:#fff;border-radius:5px;min-width:10px;text-align:center;margin-right:5px}.counter .counter-content .counter-number[data-v-2c1886a6]:last-child{margin:0}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(3){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(3):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(6){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(6):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(9){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(9):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(12){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(12):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(15){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(15):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(18){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(18):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(21){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(21):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(24){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(24):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(27){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(27):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(30){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(30):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(33){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(33):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(36){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(36):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(39){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(39):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(42){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(42):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(45){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(45):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(48){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(48):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(51){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(51):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(54){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(54):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(57){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(57):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(60){margin-left:10px}.counter .counter-content .counter-number[data-v-2c1886a6]:nth-last-child(60):before{content:"";width:2px;height:4px;background:#333;position:absolute;left:-8px;bottom:7px;border-radius:4px}.counter .counter-content .counter-number[data-v-2c1886a6]:first-child{background-color:#8b0000;margin-left:0}.counter .counter-content .counter-number[data-v-2c1886a6]:first-child:before{display:none}</style><link rel="preload" href="/_nuxt/static/1645287466/posts/30/state.js" as="script"><link rel="preload" href="/_nuxt/static/1645287466/posts/30/payload.js" as="script"><link rel="preload" href="/_nuxt/static/1645287466/manifest.js" as="script">
+  </head>
+  <body>
+    <div data-server-rendered="true" id="__nuxt"><!----><div id="__layout"><div data-fetch-key="0"><div class="header-wrap" data-v-249ad96f><div class="header page" data-v-249ad96f><div class="left" data-v-249ad96f><div class="motto" data-v-249ad96f><div class="line" data-v-249ad96f>暮春早夏的月亮</div><div class="line" data-v-249ad96f>原是情人的月亮，不比秋冬是诗人的月亮</div></div> <div class="nav" data-v-249ad96f><a href="/" class="nav-item" data-v-249ad96f>首页</a><a href="https://github.com/Yidadaa" class="nav-item" data-v-249ad96f>Github</a><a href="https://cdn.jsdelivr.net/gh/Yidadaa/Coding-Every-Day@master/2022/cv.pdf" class="nav-item" data-v-249ad96f>Resume</a></div></div> <div class="right" data-v-249ad96f></div></div></div> <div class="page post-page"><div class="title"><div class="post-title">Rust 新手错误和最差实践</div></div> <div class="info"><div class="author">Yidadaa</div> <div class="date">2021/12/26</div> <div class="count"><span id="busuanzi_value_page_pv"></span> <span>views</span></div></div> <div class="post-content"><blockquote>
+<p>原文：<a href="https://adventures.michaelfbryan.com/posts/rust-best-practices/bad-habits/#using-sentinel-values">Common Newbie Mistakes and Bad Practices in Rust: Bad Habits</a><br>
+译者：<a href="https://github.com/Yidadaa">Yidadaa</a></p>
+</blockquote>
+<p>很多从其他语言过来的 Rust 新手都会不可避免地利用之前的编码经验来写 Rust，这无可厚非，毕竟确实没必要从头开始学习编程知识。但是，这些经验性知识，却极有可能导致你写出来很垃圾的 Rust 代码。</p>
+<h2>别再用哨兵值了</h2>
+<p>这可能是我最讨厌的一点。在大多数沿袭 C 语言设计的语言中（C，C#，Java 等），经常使用一个特殊值来表示某个函数执行失败的情况。比如，在 C# 中，用于在字符串中查找另一个字符串的索引位置的函数 <code>String.IndexOf(t)</code> 会在找不到 <code>t</code> 时返回 <code>-1</code>，从而写出这样的 C# 代码：</p>
+<pre class="hljs"><code><span class="hljs-built_in">string</span> sentence = <span class="hljs-string">"The fox jumps over the dog"</span>;
+
+<span class="hljs-built_in">int</span> index = sentence.IndexOf(<span class="hljs-string">"fox"</span>);
+
+<span class="hljs-keyword">if</span> (index != <span class="hljs-number">-1</span>)
+{
+  <span class="hljs-built_in">string</span> wordsAfterFox = sentence.SubString(index);
+  Console.WriteLine(wordsAfterFox);
+}
+</code></pre>
+<p>在其他的语言中，这种用法更是数不胜数，类似的哨兵值还有空字符串 <code>""</code> 或者 <code>null</code>、<code>None</code> 之类的空值。</p>
+<p>既然它这么常用，为什么还要说它很差劲呢？原因就是你极有可能会忘记处理哨兵值所代表的失败情况，然后导致整个程序直接崩溃。</p>
+<p>Rust 则提供了很好的解决方案，那就是 <code>Option</code>。<code>Option</code> 从设计层面就杜绝了忘记考虑 <code>None</code> 时的情况，编译器会在编译时就进行强制检查，如果你忘了处理 <code>None</code>，编译器会马上告诉你。上面字符串例子的代码，在 Rust 中可以写成这样：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> sentence = <span class="hljs-string">"The fox jumps over the dog"</span>;
+<span class="hljs-keyword">let</span> index = sentence.find(<span class="hljs-string">"fox"</span>);
+
+<span class="hljs-comment">// let words_after_fox = &sentence[index..];</span>
+<span class="hljs-comment">// 如果你直接使用 index，会得到报错：Error: Can't index str with Option&lt;usize></span>
+
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(fox) = index {
+  <span class="hljs-keyword">let</span> words_after_fox = &sentence[fox..];
+  <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, words_after_fox);
+}
+</code></pre>
+<h2>别再用匈牙利命名了</h2>
+<p>上世纪 70 年代，程序员们逐渐开始在无类型或动态类型语言中使用<a href="https://en.wikipedia.org/wiki/Hungarian_notation">匈牙利命名法</a>，他们给变量名加上不同的前缀来表示变量的类型，比如 <code>bVisited</code> 表示布尔型的变量 <code>visited</code>，<code>strName</code> 表示字符串类型的变量 <code>name</code>。</p>
+<p>我们可以在 <code>Delphi</code> 语言中见到大量的例子，<code>T</code> 开头的表示类（class）或者类型（type），<code>F</code> 表示属性值（fields），<code>A</code> 表示参数（arguments），诸如此类。</p>
+<pre class="hljs"><code><span class="hljs-keyword">type</span>
+ TKeyValue = <span class="hljs-keyword">class</span>
+  <span class="hljs-keyword">private</span>
+    FKey: integer;
+    FValue: TObject;
+  <span class="hljs-keyword">public</span>
+    <span class="hljs-keyword">property</span> Key: integer <span class="hljs-keyword">read</span> FKey <span class="hljs-keyword">write</span> FKey;
+    <span class="hljs-keyword">property</span> Value: TObject <span class="hljs-keyword">read</span> FValue <span class="hljs-keyword">write</span> FValue;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Frobnicate</span><span class="hljs-params">(ASomeArg: <span class="hljs-keyword">string</span>)</span>:</span> <span class="hljs-keyword">string</span>;
+  <span class="hljs-keyword">end</span>;
+</code></pre>
+<p>C# 中也有类似的使用习惯，比如用 <code>I</code> 开头表示一个接口（interface），所以 C# 程序员很可能会写出这种 Rust 代码：</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">IClone</span></span> {
+  <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">clone</span></span>(&<span class="hljs-keyword">self</span>) -> <span class="hljs-keyword">Self</span>;
+}
+</code></pre>
+<p>你大可以直接扔掉前面的 <code>I</code>，因为 Rust 的语法已经保证了我们很难混淆 <code>trait</code> 和 <code>type</code>，不像 C# 很容易就分不清 <code>interface</code> 和 <code>class</code>（译者按：Typescript 中就是 <code>interface</code>、<code>type</code> 和 <code>class</code> 大混战了，狗头.jpg）。</p>
+<p>此外，你也没有必要在给一些工具函数或者中间变量命名时带上它的类型信息，比如下面的代码：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> account_bytes: <span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">u8</span>> = read_some_input();
+<span class="hljs-keyword">let</span> account_str = <span class="hljs-built_in">String</span>::from_utf8(account_bytes)?;
+<span class="hljs-keyword">let</span> account: Account = account_str.parse()?;
+</code></pre>
+<p>既然 <code>String.from_utf8()</code> 已经明明白白地返回了一个字符串，为什么还要在命名时加上 <code>_str</code> 后缀呢？</p>
+<p>与其他语言不同，Rust 语言鼓励程序员在对变量进行一系列变换操作时，使用同名变量覆写掉不再使用的旧值，比如：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> account: <span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">u8</span>> = read_some_input();
+<span class="hljs-keyword">let</span> account = <span class="hljs-built_in">String</span>::from_utf8(account)?;
+<span class="hljs-keyword">let</span> account: Account = account.parse()?;
+</code></pre>
+<p>使用相同的变量名可以很好地保证概念的一致性。</p>
+<p>有些语言会明令禁止<a href="https://rules.sonarsource.com/cpp/RSPEC-1117">覆写变量</a>，尤其像 Javascript 这种动态类型语言，因为频繁变化的类型，在缺少类型推断的情况下，尤其有可能会导致 bug 出现。</p>
+<h2>你可能不需要这么多 <code>Rc&lt;RefCell&lt;T>></code></h2>
+<p>OOP 编程实践常常会保存其他对象的引用，并在合适的时候调用他们的函数，这没啥不好的，依赖注入（Dependency Injection）是个蛮不错的实践，不过有别于大多数面向对象的语言，Rust 并没有垃圾内存回收机制（Garbage Collector），并且对共享可变性非常敏感。</p>
+<p>举个例子，我们正要实现一个打怪兽的游戏，玩家需要对怪物们造成足量伤害才算打败他们（我也不知道为什么要这么设定，可能是接受了什么委托？）。</p>
+<p>先创建一个 <code>Monster</code> 类，包含 <code>health</code> 生命值属性以及 <code>takeDamage()</code> 遭受伤害的方法，为了能知道怪物遭受了多少伤害，我们允许为 <code>Monster</code> 类注入一个回调函数，该回调函数可以接收每次遭受的伤害值。</p>
+<pre class="hljs"><code><span class="hljs-keyword">type</span> OnReceivedDamage = <span class="hljs-function">(<span class="hljs-params">damageReceived: <span class="hljs-built_in">number</span></span>) =></span> <span class="hljs-built_in">void</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Monster</span> </span>{
+  <span class="hljs-attr">health</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">50</span>;
+  receivedDamage: OnReceivedDamage[] = [];
+
+  <span class="hljs-function"><span class="hljs-title">takeDamage</span>(<span class="hljs-params">amount: <span class="hljs-built_in">number</span></span>)</span> {
+    amount = <span class="hljs-built_in">Math</span>.min(<span class="hljs-built_in">this</span>.health, amount);
+    <span class="hljs-built_in">this</span>.health -= amount;
+    <span class="hljs-built_in">this</span>.receivedDamage.forEach(<span class="hljs-function">(<span class="hljs-params">cb</span>) =></span> cb(amount));
+  }
+
+  on(event: <span class="hljs-string">"damaged"</span>, <span class="hljs-attr">callback</span>: OnReceivedDamage): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">this</span>.receivedDamage.push(callback);
+  }
+}
+</code></pre>
+<p>然后设计一个伤害计数类 <code>DamageCounter</code>，可以累计怪物伤害值：</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DamageCounter</span> </span>{
+  <span class="hljs-attr">damageInflicted</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;
+
+  reachedTargetDamage(): <span class="hljs-built_in">boolean</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.damageInflicted > <span class="hljs-number">100</span>;
+  }
+
+  <span class="hljs-function"><span class="hljs-title">onDamageInflicted</span>(<span class="hljs-params">amount: <span class="hljs-built_in">number</span></span>)</span> {
+    <span class="hljs-built_in">this</span>.damageInflicted += amount;
+  }
+}
+</code></pre>
+<p>然后我们对怪物造成随机伤害，直到伤害计数达到上限。</p>
+<pre class="hljs"><code><span class="hljs-keyword">const</span> counter = <span class="hljs-keyword">new</span> DamageCounter();
+
+<span class="hljs-keyword">const</span> monsters = [
+  <span class="hljs-keyword">new</span> Monster(),
+  <span class="hljs-keyword">new</span> Monster(),
+  <span class="hljs-keyword">new</span> Monster(),
+  <span class="hljs-keyword">new</span> Monster(),
+  <span class="hljs-keyword">new</span> Monster(),
+];
+monsters.forEach(<span class="hljs-function">(<span class="hljs-params">m</span>) =></span>
+  m.on(<span class="hljs-string">"damaged"</span>, <span class="hljs-function">(<span class="hljs-params">amount</span>) =></span> counter.onDamageInflicted(amount))
+);
+
+<span class="hljs-keyword">while</span> (!counter.reachedTargetDamage()) {
+  <span class="hljs-comment">// 随机选中怪物</span>
+  <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * monsters.length);
+  <span class="hljs-keyword">const</span> target = monsters[index];
+  <span class="hljs-comment">// 产生随机伤害</span>
+  <span class="hljs-keyword">const</span> damage = <span class="hljs-built_in">Math</span>.round(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">50</span>);
+  target.takeDamage(damage);
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Monster <span class="hljs-subst">${index}</span> received <span class="hljs-subst">${damage}</span> damage`</span>);
+}
+</code></pre>
+<p>这里是<a href="https://www.typescriptlang.org/play?#code/C4TwDgpgBA8gdgJQgYwgSwG4QCYBECGAtvgObQC8UAFIQFxQCyA9nAM7AQBOANFNkaQhJUmHPTgBXQgCMuASijkAfFAxM02ANwAobcgA2+Vq0Yt2XKAG9tUW1AAWEfPuD3xU2Z0VQArAAYdOyhOFHQsPAEyenhhMJwCYjIAbQBdb1SdGztgfABrCATBKiImCThgdxl5Kyyg2xKy4G8GfFcAOkI0OCpXNFY2x2dXXgbyuUC6217+wZd7KABaSlHgTTrauum2kJFwwrI2gDMmTgBRfGR7KmRpRRUbnvs+kcJSsfGNgF9dIJYqCCw5XoACJ+IkcMDeMhnPppBdctFEKFRBFwXJ6GoNDVJlMnv0dnFUYI2mAJKwrtD9LD4R8gt9vnpDMYoPsIABhN4cLzWIJgwQASTgh30aGQHGwlU83gCPzsIQujmwABV8JwyMBWVR0VBpEwmPonHBsTiQsAJJwjVs+WRBcLReKoCoAIx+GV02W2Fis20isU4YqvRqS6o8nFWyIQH32nBQADUy0D5QmtnpumQZia6caFkocAgAHcWRGOdnOFrMum2E1XlWuCZKEk84XmLWy3JeE3TK2tR2C13zG3e82M1we1BOy2B1qUjoawP+sczgqaHcoIQ2n9QRHsJDqAB9F6chTKKBZ8pcDdwb1C33igNHuQfbT5p4G6gAQjPXO2TkuOBVaoQBqEZagooa2AA9BBUBgKKuRQPgwT4HA2BMIQa4jpwGyVuwUBdNgEAAB7NK09hHPoepli07ScMhqGEFqABUc5cv0BpwCQri0nYOFNDkgFNJQLF1kk+FETOGxQVArgQEa1rQGgTSIdIinYRmfARiRNFvNgVDUWRtEoWhWpQIxvh+NxUyquqbQ5PkmryU+QQ4fqEBtBRJBUAABpOXJQAAJJYYmEZ8wTIuEAWWPJoXydQwBMDk+gaeCeE3tGEqRV+F7yVGfrYJ8XkfJ8QA">在线运行示例</a>。</p>
+<p>然后我们用 Rust 重写上述逻辑，<code>Monster</code> 结构体结构保持不变，使用 <code>Box&lt;dyn Fn(u32)></code> 来接收闭包，该闭包接受一个 <code>u32</code> 型参数。</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">OnReceivedDamage</span></span> = <span class="hljs-built_in">Box</span>&lt;<span class="hljs-keyword">dyn</span> <span class="hljs-built_in">Fn</span>(<span class="hljs-built_in">u32</span>)>;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Monster</span></span> {
+    health: <span class="hljs-built_in">u32</span>,
+    received_damage: <span class="hljs-built_in">Vec</span>&lt;OnReceivedDamage>,
+}
+
+<span class="hljs-keyword">impl</span> Monster {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">take_damage</span></span>(&<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, amount: <span class="hljs-built_in">u32</span>) {
+        <span class="hljs-keyword">let</span> damage_received = cmp::min(<span class="hljs-keyword">self</span>.health, amount);
+        <span class="hljs-keyword">self</span>.health -= damage_received;
+        <span class="hljs-keyword">for</span> callback <span class="hljs-keyword">in</span> &<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>.received_damage {
+            callback(damage_received);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">add_listener</span></span>(&<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, listener: OnReceivedDamage) {
+        <span class="hljs-keyword">self</span>.received_damage.push(listener);
+    }
+}
+
+<span class="hljs-keyword">impl</span> <span class="hljs-built_in">Default</span> <span class="hljs-keyword">for</span> Monster {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">default</span></span>() -> <span class="hljs-keyword">Self</span> {
+        Monster { health: <span class="hljs-number">100</span>, received_damage: <span class="hljs-built_in">Vec</span>::new() }
+    }
+}
+</code></pre>
+<p>随后是 <code>DamageCounter</code> 类：</p>
+<pre class="hljs"><code><span class="hljs-meta">#[derive(Default)]</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DamageCounter</span></span> {
+    damage_inflicted: <span class="hljs-built_in">u32</span>,
+}
+
+<span class="hljs-keyword">impl</span> DamageCounter {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">reached_target_damage</span></span>(&<span class="hljs-keyword">self</span>) -> <span class="hljs-built_in">bool</span> {
+        <span class="hljs-keyword">self</span>.damage_inflicted > <span class="hljs-number">100</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">on_damage_received</span></span>(&<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, damage: <span class="hljs-built_in">u32</span>) {
+        <span class="hljs-keyword">self</span>.damage_inflicted += damage;
+    }
+}
+</code></pre>
+<p>然后开始打怪：</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> rng = rand::thread_rng();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> counter = DamageCounter::default();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> monsters: <span class="hljs-built_in">Vec</span>&lt;_> = (<span class="hljs-number">0</span>..<span class="hljs-number">5</span>).map(|_| Monster::default()).collect();
+
+    <span class="hljs-keyword">for</span> monster <span class="hljs-keyword">in</span> &<span class="hljs-keyword">mut</span> monsters {
+        monster.add_listener(<span class="hljs-built_in">Box</span>::new(|damage| counter.on_damage_received(damage)));
+    }
+
+    <span class="hljs-keyword">while</span> !counter.reached_target_damage() {
+        <span class="hljs-keyword">let</span> index = rng.gen_range(<span class="hljs-number">0</span>..monsters.len());
+        <span class="hljs-keyword">let</span> target = &<span class="hljs-keyword">mut</span> monsters[index];
+
+        <span class="hljs-keyword">let</span> damage = rng.gen_range(<span class="hljs-number">0</span>..<span class="hljs-number">50</span>);
+        target.take_damage(damage);
+
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Monster {} received {} damage"</span>, index, damage);
+    }
+}
+</code></pre>
+<p>同样地，Rust 代码也有一个<a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=a8cc547728ef102bbd5dc6b9cafb0ff6">在线运行示例</a>。</p>
+<p>然而，编译器狠狠地给我们报了四个错误，全都集中在 <code>monster.add_listener()</code> 这一行：</p>
+<pre class="hljs"><code>error[E0596]: cannot borrow `counter` <span class="hljs-keyword">as</span> mutable, <span class="hljs-keyword">as</span> it is a captured variable <span class="hljs-keyword">in</span> a `<span class="hljs-built_in">Fn</span>` closure
+  --> src/main.rs:<span class="hljs-number">47</span>:<span class="hljs-number">48</span>
+   |
+<span class="hljs-number">47</span> |         monster.add_listener(<span class="hljs-built_in">Box</span>::new(|damage| counter.on_damage_received(damage)));
+   |                                                ^^^^^^^ cannot borrow <span class="hljs-keyword">as</span> mutable
+
+error[E0499]: cannot borrow `counter` <span class="hljs-keyword">as</span> mutable more than once at a time
+  --> src/main.rs:<span class="hljs-number">47</span>:<span class="hljs-number">39</span>
+   |
+<span class="hljs-number">47</span> |         monster.add_listener(<span class="hljs-built_in">Box</span>::new(|damage| counter.on_damage_received(damage)));
+   |                              ---------^^^^^^^^------------------------------------
+   |                              |        |        |
+   |                              |        |        borrows occur due to <span class="hljs-keyword">use</span> of `counter` <span class="hljs-keyword">in</span> closure
+   |                              |        `counter` was mutably borrowed here <span class="hljs-keyword">in</span> the previous iteration of the <span class="hljs-keyword">loop</span>
+   |                              cast requires that `counter` is borrowed <span class="hljs-keyword">for</span> `<span class="hljs-symbol">'static</span>`
+
+error[E0597]: `counter` does not live long enough
+  --> src/main.rs:<span class="hljs-number">47</span>:<span class="hljs-number">48</span>
+   |
+<span class="hljs-number">47</span> |         monster.add_listener(<span class="hljs-built_in">Box</span>::new(|damage| counter.on_damage_received(damage)));
+   |                              ------------------^^^^^^^----------------------------
+   |                              |        |        |
+   |                              |        |        borrowed value does not live long enough
+   |                              |        value captured here
+   |                              cast requires that `counter` is borrowed <span class="hljs-keyword">for</span> `<span class="hljs-symbol">'static</span>`
+...
+<span class="hljs-number">60</span> | }
+   | - `counter` dropped here <span class="hljs-keyword">while</span> still borrowed
+
+error[E0502]: cannot borrow `counter` <span class="hljs-keyword">as</span> immutable because it is also borrowed <span class="hljs-keyword">as</span> mutable
+  --> src/main.rs:<span class="hljs-number">50</span>:<span class="hljs-number">12</span>
+   |
+<span class="hljs-number">47</span> |         monster.add_listener(<span class="hljs-built_in">Box</span>::new(|damage| counter.on_damage_received(damage)));
+   |                              -----------------------------------------------------
+   |                              |        |        |
+   |                              |        |        first borrow occurs due to <span class="hljs-keyword">use</span> of `counter` <span class="hljs-keyword">in</span> closure
+   |                              |        mutable borrow occurs here
+   |                              cast requires that `counter` is borrowed <span class="hljs-keyword">for</span> `<span class="hljs-symbol">'static</span>`
+...
+<span class="hljs-number">50</span> |     <span class="hljs-keyword">while</span> !counter.reached_target_damage() {
+   |            ^^^^^^^ immutable borrow occurs here
+</code></pre>
+<p>看起来是一团乱麻，让我来翻译翻译<del>，什么叫惊喜</del>：</p>
+<ul>
+<li>闭包捕获了对 <code>counter</code> 的引用；</li>
+<li><code>counter.on_damage_received()</code> 方法接受 <code>&mut self</code>，所以闭包需要 <code>&mut</code> 可变引用。由于这个闭包在循环里，所以对同一个对象的可变引用 <code>&mut</code> 会执行多次，这是不被 Rust 允许的；</li>
+<li>我们传入的闭包没有任何生命周期标记，意味着它需要掌控所有包含变量的所有权，所以 <code>counter</code> 需要被移动到闭包内部，而在循环中，重复移动某值就会造成 <code>use of moved value</code> 错误；</li>
+<li>当 <code>counter</code> 被移动到闭包内后，我们又尝试在条件语句中使用它，显然也会报错。</li>
+</ul>
+<p>总之，情况不太妙。</p>
+<p>一个经典解决方法是把 <code>DamageCounter</code> 用引用计数指针裹起来，这样我们可以重复使用它了，此外由于我们需要使用 <code>&mut self</code>，所以我们需要使用 <code>RefCell</code> 来在运行时做借用检查（borrow checking），而不是在编译时。</p>
+<pre class="hljs"><code> fn main() {
+     let mut rng = rand::thread_rng();
+<span class="hljs-deletion">-    let mut counter = DamageCounter::default();</span>
+<span class="hljs-addition">+    let mut counter = Rc::new(RefCell::new(DamageCounter::default()));</span>
+     let mut monsters: Vec&lt;_> = (0..5).map(|_| Monster::default()).collect();
+
+     for monster in &mut monsters {
+<span class="hljs-deletion">-        monster.add_listener(Box::new(|damage| counter.on_damage_received(damage)));</span>
+<span class="hljs-addition">+        let counter = Rc::clone(&counter);</span>
+<span class="hljs-addition">+        monster.add_listener(Box::new(move |damage| {</span>
+<span class="hljs-addition">+            counter.borrow_mut().on_damage_received(damage)</span>
+<span class="hljs-addition">+        }));</span>
+     }
+
+<span class="hljs-deletion">-    while !counter.reached_target_damage() {</span>
+<span class="hljs-addition">+    while !counter.borrow().reached_target_damage() {</span>
+         let index = rng.gen_range(0..monsters.len());
+         let target = &mut monsters[index];
+         ...
+     }
+ }
+</code></pre>
+<p>这里是<a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=7aca92432f337fa29de62999ea5709b8">改动后的代码</a>。</p>
+<p>虽然现在代码可以正常运行了，但是整块代码会被 <code>Rc&lt;RefCell>Vec&lt;Foo>>></code> 之类的玩意儿搞得乌烟瘴气。而且当代码变得更复杂时，<code>RefCell</code> 也有可能会被可变借用多次。而如果在多线程中使用了 <code>Arc&lt;Mutex&lt;Vec&lt;Foo>>></code>，<code>RefCell</code> 引发 panic 之后，整个程序会死锁。</p>
+<p>所以，一个更好的解决方法是避免在结构体中存储持久化引用。我们对 <code>Monster::take_damage()</code> 稍加改造：</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Monster</span></span> {
+    health: <span class="hljs-built_in">u32</span>,
+}
+
+<span class="hljs-keyword">impl</span> Monster {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">take_damage</span></span>(&<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, amount: <span class="hljs-built_in">u32</span>, on_damage_received: <span class="hljs-keyword">impl</span> <span class="hljs-built_in">FnOnce</span>(<span class="hljs-built_in">u32</span>)) {
+        <span class="hljs-keyword">let</span> damage_received = cmp::min(<span class="hljs-keyword">self</span>.health, amount);
+        <span class="hljs-keyword">self</span>.health -= damage_received;
+        on_damage_received(damage_received);
+    }
+}
+
+<span class="hljs-keyword">impl</span> <span class="hljs-built_in">Default</span> <span class="hljs-keyword">for</span> Monster {
+  <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">default</span></span>() -> <span class="hljs-keyword">Self</span> { Monster { health: <span class="hljs-number">100</span> } }
+}
+
+<span class="hljs-comment">// 省略了 `DamageCounter` 的代码</span>
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> rng = rand::thread_rng();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> counter = DamageCounter::default();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> monsters: <span class="hljs-built_in">Vec</span>&lt;_> = (<span class="hljs-number">0</span>..<span class="hljs-number">5</span>).map(|_| Monster::default()).collect();
+
+    <span class="hljs-keyword">while</span> !counter.reached_target_damage() {
+        <span class="hljs-keyword">let</span> index = rng.gen_range(<span class="hljs-number">0</span>..monsters.len());
+        <span class="hljs-keyword">let</span> target = &<span class="hljs-keyword">mut</span> monsters[index];
+
+        <span class="hljs-keyword">let</span> damage = rng.gen_range(<span class="hljs-number">0</span>..<span class="hljs-number">50</span>);
+        target.take_damage(damage, |dmg| counter.on_damage_received(dmg));
+
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Monster {} received {} damage"</span>, index, damage);
+    }
+}
+</code></pre>
+<p>这里是<a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=52b789a7616efe6c2e24b7e1949f7c03">在线示例</a>。</p>
+<p>由于避免了存储回调函数，改造后的代码行数从 62 行下降到了 47 行。</p>
+<p>此外，我们也可以给 <code>take_damage()</code> 加个返回值，这样可以把伤害值放在返回值里，以备后用：</p>
+<pre class="hljs"><code><span class="hljs-keyword">impl</span> Monster {
+    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">take_damage</span></span>(&<span class="hljs-keyword">mut</span> <span class="hljs-keyword">self</span>, amount: <span class="hljs-built_in">u32</span>) -> AttackSummary {
+        <span class="hljs-keyword">let</span> damage_received = cmp::min(<span class="hljs-keyword">self</span>.health, amount);
+        <span class="hljs-keyword">self</span>.health -= damage_received;
+        AttackSummary { damage_received }
+    }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AttackSummary</span></span> {
+    damage_received: <span class="hljs-built_in">u32</span>,
+}
+
+<span class="hljs-comment">// 省略了 `DamageCounter` 的代码</span>
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> rng = rand::thread_rng();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> counter = DamageCounter::default();
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> monsters: <span class="hljs-built_in">Vec</span>&lt;_> = (<span class="hljs-number">0</span>..<span class="hljs-number">5</span>).map(|_| Monster::default()).collect();
+
+    <span class="hljs-keyword">while</span> !counter.reached_target_damage() {
+        <span class="hljs-keyword">let</span> index = rng.gen_range(<span class="hljs-number">0</span>..monsters.len());
+        <span class="hljs-keyword">let</span> target = &<span class="hljs-keyword">mut</span> monsters[index];
+
+        <span class="hljs-keyword">let</span> damage = rng.gen_range(<span class="hljs-number">0</span>..<span class="hljs-number">50</span>);
+        <span class="hljs-keyword">let</span> AttackSummary { damage_received } = target.take_damage(damage);
+        counter.on_damage_received(damage_received);
+
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Monster {} received {} damage"</span>, index, damage);
+    }
+}
+</code></pre>
+<p>当代码复杂度上升时，代码也不会变成一团糟，而且它看起来更“函数式”。</p>
+<h2>错用整数类型</h2>
+<p>另一个从 C 语言带来的坏毛病是错用整数类型，导致代码里到处都是 <code>usize</code> 的类型转换，尤其是在对数组做索引时。</p>
+<p>C 程序员在初学时就被各种教程教会了使用 <code>int</code> 类型来做索引和循环，当他们开始写 Rust 时，也自然而然地用 <code>Vec&lt;i32></code> 类型来做数组切片。但是阿 Rust 真的很严格，不让程序员使用 <code>usize</code> 以外的类型对数组、切片和 <code>Vec</code> 进行索引，这就不得不在索引的时候进行一次 <code>i32 as usize</code> 的类型转换。</p>
+<p>Rust 这么做有诸多好处：</p>
+<ul>
+<li>无符号类型可以避免负数索引（译者按：Python 程序员请求出战）；</li>
+<li><code>usize</code> 与普通指针的大小相同，指针运算不会造成隐式类型转换；</li>
+<li>内存操作函数 <code>std::mem::size_of()</code> 和 <code>std::mem::align_of()</code> 返回 <code>usize</code> 类型。</li>
+</ul>
+<p>所以，请尽量使用 <code>usize</code> 类型作为可能涉及索引操作的中间变量的首选类型。</p>
+<h2>没人比我更懂 <code>unsafe</code></h2>
+<p>每次当我看到 C 程序员使用 <code>std::mem::transmute()</code> 函数或者裸指针来跳过编译器的借用检查时，我都会想起论坛中那条古老的 Rust 圣经：<a href="https://users.rust-lang.org/t/rust-koans/2408?u=michael-f-bryan">Obstacles, by Daniel Keep</a>。</p>
+<p>建议你现在就去读一读，我可以等。（译者按：有空了给大伙翻译一下。）</p>
+<p>你可能已经身经百战见得多了，精通八种编程语言，所以毫无顾忌地破坏 Rust 精心构筑的规则：创建自引用的结构体、用 <code>unsafe</code> 创建全局变量。而且每一次，你都用同样的借口：“这是个单线程程序，所以 <code>static mut</code> 百分之一万没问题”、“这在 C 语言里跑得好好的”。</p>
+<p><code>unsafe</code> 很微妙，你必须要对 Rust 的借用检查规则和内存模型有深刻的认识才行。我也不想像祥林嫂一样念叨：“未成年人请在编译器监督下编写 <code>unsafe</code> 多线程代码”，但如果你刚开始学这门语言，我衷心建议你耐心从编译器报错的痛苦中慢慢品味 Rust 的美妙。</p>
+<p>当你成为了 Rust 大师，你可以尽情玩弄 <code>unsafe</code> 代码，但在那之前，我还是想告诉你，<code>unsafe</code> 不是杀死编译器报错的板蓝根，也不是能让你自在书写 C 风味 Rust 代码的作弊码。</p>
+<h2>不舍得用命名空间</h2>
+<p>C 语言中的另一个常见实践是给函数增加所属的库名或者模块名作为前缀，比如 <code>rune_wasmer_runtime_load()</code> 就表示 <code>rune</code> 库的 <code>wasmer/runtime</code> 模块下的 <code>load()</code> 函数。Rust 提供了非常好用的命名空间机制，请尽情使用它，比如刚刚这个函数就可以写成 <code>rune::wasmer::Runtime::load()</code>。</p>
+<h2>滥用切片索引</h2>
+<p>C 语言离不开 <code>for (int i = 0; i &lt; n; i ++)</code>，就像西方不能没有耶路撒冷。</p>
+<p>所以下面的 Rust 的代码也就不足为奇：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> points: <span class="hljs-built_in">Vec</span>&lt;Coordinate> = ...;
+<span class="hljs-keyword">let</span> differences = <span class="hljs-built_in">Vec</span>::new();
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>..points.len() [
+  <span class="hljs-keyword">let</span> current = points[i];
+  <span class="hljs-keyword">let</span> previous = points[i-<span class="hljs-number">1</span>];
+  differences.push(current - previous);
+]
+</code></pre>
+<p>就像呼吸一样自然。然而，就算是老司机也难免会中招下标越界 bug ，尤其当你想在循环里取前一个值时，你就得花心思去考虑 <code>i</code> 是否是从 1 开始的。</p>
+<p>Rust 很担心你，所以拿出了迭代器，切片类型甚至还有 <code>windows()</code> 和 <code>array_windows()</code> 这种高级函数来获取相邻的元素对。上面的代码可以重写为：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> points: <span class="hljs-built_in">Vec</span>&lt;Coordinate> = ...;
+<span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> differences = <span class="hljs-built_in">Vec</span>::new();
+
+<span class="hljs-keyword">for</span> [previous, current] <span class="hljs-keyword">in</span> points.array_windows().copied() {
+  differences.push(current - previous);
+}
+</code></pre>
+<p>甚至可以用链式调用来炫技：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> differences: <span class="hljs-built_in">Vec</span>&lt;_> = points
+  .array_windows()
+  .copied()
+  .map(|[previous, current]| current - previous)
+  .collect();
+</code></pre>
+<p>有些人会主张使用了 <code>map()</code> 和 <code>collect</code> 版本的代码更加“函数式“，我则觉得仁者见仁，智者见智。</p>
+<p>不仅如此，迭代器的性能往往比朴素的 <code>for</code> 循环更好，你可以在<a href="https://users.rust-lang.org/t/we-all-know-iter-is-faster-than-loop-but-why/51486/7?u=michael-f-bryan">这里</a>了解原因。</p>
+<h2>滥用迭代器</h2>
+<p>一旦你用迭代器用上瘾了，你极有可能跑向对立面：拿着迭代器这个锤子，看啥都像钉子。由 <code>map</code>，<code>filter</code> 和 <code>and_then()</code> 堆叠成的链式调用会让代码可读性下降，而且频繁使用闭包，会让数据类型变得不再直观。</p>
+<p>下面有个例子，演示了迭代器如何让你的代码变得更复杂，你可以读一读这段代码，并猜猜它是干啥的：</p>
+<pre class="hljs"><code><span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">functional_blur</span></span>(input: &Matrix) -> Matrix {
+    <span class="hljs-built_in">assert!</span>(input.width >= <span class="hljs-number">3</span>);
+    <span class="hljs-built_in">assert!</span>(input.height >= <span class="hljs-number">3</span>);
+
+    <span class="hljs-comment">// 先保存首尾两行，方便后续使用</span>
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> rows = input.rows();
+    <span class="hljs-keyword">let</span> first_row = rows.next().unwrap();
+    <span class="hljs-keyword">let</span> last_row = rows.next_back().unwrap();
+
+    <span class="hljs-keyword">let</span> top_row = input.rows();
+    <span class="hljs-keyword">let</span> middle_row = input.rows().skip(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">let</span> bottom_row = input.rows().skip(<span class="hljs-number">2</span>);
+
+    <span class="hljs-keyword">let</span> blurred_elements = top_row
+        .zip(middle_row)
+        .zip(bottom_row)
+        .flat_map(|((top, middle), bottom)| blur_rows(top, middle, bottom));
+
+    <span class="hljs-keyword">let</span> elements: <span class="hljs-built_in">Vec</span>&lt;<span class="hljs-built_in">f32</span>> = first_row
+        .iter()
+        .copied()
+        .chain(blurred_elements)
+        .chain(last_row.iter().copied())
+        .collect();
+
+    Matrix::new_row_major(elements, input.width, input.height)
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">blur_rows</span></span>&lt;<span class="hljs-symbol">'a</span>>(
+    top_row: &<span class="hljs-symbol">'a</span> [<span class="hljs-built_in">f32</span>],
+    middle_row: &<span class="hljs-symbol">'a</span> [<span class="hljs-built_in">f32</span>],
+    bottom_row: &<span class="hljs-symbol">'a</span> [<span class="hljs-built_in">f32</span>],
+) -> <span class="hljs-keyword">impl</span> <span class="hljs-built_in">Iterator</span>&lt;Item = <span class="hljs-built_in">f32</span>> + <span class="hljs-symbol">'a</span> {
+    <span class="hljs-comment">// 保存头尾元素，以备后用</span>
+    <span class="hljs-keyword">let</span> &first = middle_row.first().unwrap();
+    <span class="hljs-keyword">let</span> &last = middle_row.last().unwrap();
+
+    <span class="hljs-comment">// 获取上中下的 3x3 矩阵来做平均</span>
+    <span class="hljs-keyword">let</span> top_window = top_row.windows(<span class="hljs-number">3</span>);
+    <span class="hljs-keyword">let</span> middle_window = middle_row.windows(<span class="hljs-number">3</span>);
+    <span class="hljs-keyword">let</span> bottom_window = bottom_row.windows(<span class="hljs-number">3</span>);
+
+    <span class="hljs-comment">// 滑动窗口取均值，除了首尾元素</span>
+    <span class="hljs-keyword">let</span> averages = top_window
+        .zip(middle_window)
+        .zip(bottom_window)
+        .map(|((top, middle), bottom)| top.iter().chain(middle).chain(bottom).sum::&lt;<span class="hljs-built_in">f32</span>>() / <span class="hljs-number">9.0</span>);
+
+    std::iter::once(first)
+        .chain(averages)
+        .chain(std::iter::once(last))
+}
+</code></pre>
+<p><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=da8fa6e55ca5a0de6005b13672688c14">在线示例</a>。</p>
+<p>看起来好像并不难，做个均值滤波罢了，不过我这里有个更好的实现：</p>
+<pre class="hljs"><code><span class="hljs-keyword">pub</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">imperative_blur</span></span>(input: &Matrix) -> Matrix {
+    <span class="hljs-built_in">assert!</span>(input.width >= <span class="hljs-number">3</span>);
+    <span class="hljs-built_in">assert!</span>(input.height >= <span class="hljs-number">3</span>);
+
+    <span class="hljs-comment">// 直接从输入值拷贝返回值矩阵，这样就不需要考虑边界条件</span>
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> output = input.clone();
+
+    <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>..(input.height - <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>..(input.width - <span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> pixel_value = <span class="hljs-number">0.0</span>;
+
+            pixel_value += input[[x - <span class="hljs-number">1</span>, y - <span class="hljs-number">1</span>]];
+            pixel_value += input[[x, y - <span class="hljs-number">1</span>]];
+            pixel_value += input[[x + <span class="hljs-number">1</span>, y - <span class="hljs-number">1</span>]];
+
+            pixel_value += input[[x - <span class="hljs-number">1</span>, y]];
+            pixel_value += input[[x, y]];
+            pixel_value += input[[x + <span class="hljs-number">1</span>, y]];
+
+            pixel_value += input[[x - <span class="hljs-number">1</span>, y + <span class="hljs-number">1</span>]];
+            pixel_value += input[[x, y + <span class="hljs-number">1</span>]];
+            pixel_value += input[[x + <span class="hljs-number">1</span>, y + <span class="hljs-number">1</span>]];
+
+            output[[x, y]] = pixel_value / <span class="hljs-number">9.0</span>;
+        }
+    }
+
+    output
+}
+</code></pre>
+<p><a href="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=ed5a8cbe8cfab762c32466c551957810">在线示例</a>。</p>
+<p>我想你的心里已经有答案了吧。</p>
+<h2>不会用模式匹配</h2>
+<p>让我们回到一开始的 <code>IndexOf()</code> 函数，我们用 <code>Option</code> 类型举了一个很好的例子，先看下原始代码：</p>
+<pre class="hljs"><code><span class="hljs-built_in">int</span> index = sentence.IndexOf(<span class="hljs-string">"fox"</span>);
+
+<span class="hljs-keyword">if</span> (index != <span class="hljs-number">-1</span>)
+{
+  <span class="hljs-built_in">string</span> wordsAfterFox = sentence.SubString(index);
+  Console.WriteLine(wordsAfterFox);
+}
+</code></pre>
+<p>然后，你可能会看到这样的 Rust 代码：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> opt: <span class="hljs-built_in">Option</span>&lt;_> = ...;
+
+<span class="hljs-keyword">if</span> opt.is_some() {
+  <span class="hljs-keyword">let</span> value = opt.unwrap();
+  ...
+}
+</code></pre>
+<p>或者这样的：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> list: &[<span class="hljs-built_in">f32</span>] = ...;
+
+<span class="hljs-keyword">if</span> !list.is_empty() {
+  <span class="hljs-keyword">let</span> first = list[<span class="hljs-number">0</span>];
+  ...
+}
+</code></pre>
+<p>这些条件语句都在避免某些边界条件，不过就像之前说到的哨兵值一样，我们在重构的时候依然会极有可能引入 bug。</p>
+<p>而使用 Rust 的模式匹配，你可以保证当且仅当值有效时才会执行到对应的代码：</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(value) = opt {
+  ...
+}
+
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> [first, ..] = list {
+  ...
+}
+</code></pre>
+<p>相比于之前的代码，由于避免了 <code>opt.unwrap()</code> 和 <code>list[index]</code>，模式匹配可以有更好的性能（作者的一点忠告：不要在网上听风就是雨，如果你真的想知道真相，建议写个 Benchmark 验证下）。</p>
+<h2>别再构造函数后初始化</h2>
+<p>许多语言都会在构造对象后调用对应的初始化函数（<code>init()</code> 之类的），但这有悖于 Rust 的约定：让无效状态不可见。</p>
+<p>假设你在写个 NLP 程序，需要加载一个包含所有关键词的词表：</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> dict = Dictionary::new();
+<span class="hljs-comment">// 读取文件并且把值存到哈希表或者列表里</span>
+dict.load_from_file(<span class="hljs-string">"./words.txt"</span>)?;
+</code></pre>
+<p>然而，如果这么写了，意味着 <code>Dictionary</code> 类有两个状态：空的和满的。</p>
+<p>那么如果后续代码假设 <code>Dictionary</code> 有值，并且直接使用它，那当我们错误地对一个空状态的 <code>Dictionary</code> 进行索引时，就会造成 panic。</p>
+<p>在 Rust 中，最好在构造时就对结构体进行初始化，来避免结构体的空状态。</p>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> dict = Dictionary::from_file(<span class="hljs-string">"./words.txt"</span>)?;
+
+<span class="hljs-keyword">impl</span> Dictionary {
+  <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">from_file</span></span>(filename: <span class="hljs-keyword">impl</span> <span class="hljs-built_in">AsRef</span>&lt;Path>) -> <span class="hljs-built_in">Result</span>&lt;<span class="hljs-keyword">Self</span>, Error> {
+    <span class="hljs-keyword">let</span> text = std::fs::read_to_string(filename)?;
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> words = <span class="hljs-built_in">Vec</span>::new();
+    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> text.lines() {
+      words.push(line);
+    }
+    <span class="hljs-literal">Ok</span>(Dictionary { words })
+  }
+}
+</code></pre>
+<p><code>Dictionary::from_file()</code> 直接执行了初始化操作，并返回了初始化后的、立即可用的结构体，从而避免了上述问题。</p>
+<p>当然，遇到这种问题的频率因人而异，完全取决于你的编码经验和代码风格。</p>
+<p>一般来讲，函数式语言强调不可变性，所以函数式语言的使用者会天然地掌握这个经验。毕竟当你不能随便改变某个值时，你也不大可能创建一个初始化了一半的变量，然后再用什么其他值去填满它。</p>
+<p>但面向对象的语言就不太一样了，它可能更鼓励你先构造个空对象，然后再调用具体函数初始化它，毕竟对象引用很容易为 <code>null</code>，而且他们也不关心什么可变性之类的玩意儿……现在你知道为啥那些面向对象语言会经常由于 <code>NullPointerException</code> 崩溃了吧。</p>
+<h2>保护性拷贝</h2>
+<p>不可变对象的一个显而易见的优点时，你永远可以相信它不会发生变化，而放心地使用它的值。但某些语言，比如 Python 或者 Java，不可变性没有传递性。举个例子，<code>x</code> 是个不可变对象，<code>x.y</code> 却不一定是不可变的，除非显式地定义它的可变性。</p>
+<p>这意味着会出现下面的 Python 代码：</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ImmutablePerson</span>:</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name: <span class="hljs-built_in">str</span>, age: <span class="hljs-built_in">int</span>, addresses: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):</span>
+    self._name = name
+    self._age = age
+    self._addresses = addresses
+
+  <span class="hljs-comment"># 只读属性</span>
+<span class="hljs-meta">  @property</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span>(<span class="hljs-params">self</span>):</span> <span class="hljs-keyword">return</span> self._name
+<span class="hljs-meta">  @property</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">age</span>(<span class="hljs-params">self</span>):</span> <span class="hljs-keyword">return</span> self._age
+<span class="hljs-meta">  @property</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addresses</span>(<span class="hljs-params">self</span>):</span> <span class="hljs-keyword">return</span> self._addresses
+</code></pre>
+<p>后来其他人用了这个号称不可变的 <code>ImmutablePerson</code>，但是却不小心把它搞乱了：</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send_letters</span>(<span class="hljs-params">message: <span class="hljs-built_in">str</span>, addresses: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):</span>
+  <span class="hljs-comment"># 注意：发信 api 只接受大写字母，所以这里要预处理</span>
+  <span class="hljs-keyword">for</span> i, address <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(addresses):
+    addresses[i] = addresses.upper()
+
+  client = PostOfficeClient()
+  client.send_bulk_mail(message, addresses)
+
+
+person = ImmutablePerson(<span class="hljs-string">"Joe Bloggs"</span>, <span class="hljs-number">42</span>, [<span class="hljs-string">"123 Fake Street"</span>])
+
+send_letters(
+  <span class="hljs-string">f"Dear <span class="hljs-subst">{person.name}</span>, I Nigerian prince. Please help me moving my monies."</span>,
+  person.addresses
+)
+
+<span class="hljs-built_in">print</span>(person.addresses) <span class="hljs-comment"># ["123 FAKE STREET"]</span>
+</code></pre>
+<p>我承认，这个例子确实有点刻意了，但是修改一个函数的传参却非常常见（译者按：尤其在某些深度学习项目里）。当你知道你自己定义的 <code>ImmutablePerson</code> 的 <code>addresses</code> 属性不可变时，不会有什么大问题，但是当你和别人协作，而且别人还不知道 <code>addresses</code> 不可变时，那就出大问题了。</p>
+<p>事情也不是无法挽回，解决这个问题的经典方法是，总是在获取属性值的时候，返回它的拷贝，而非它自己：</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ImmutablePerson</span>:</span>
+  ...
+
+<span class="hljs-meta">  @property</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addresses</span>(<span class="hljs-params">self</span>):</span> <span class="hljs-keyword">return</span> self._addresses.copy()
+</code></pre>
+<p>这样就可以保证别人在使用该对象的属性时，不会意外改变它的原始值。</p>
+<p>考虑到这篇文章的主题是 Rust，你可能已经猜到了造成这种问题的根本原因：别名与可变性。</p>
+<p>并且你也可能想到，这种情况不会发生在 Rust 中，生命周期机制以及“有且只能有一处可变引用”的机制，保证了程序员无法在取得变量的所有权情况下去改动它的值，也没法显式地使用 <code>std::sync::Mutex&lt;T></code> 去改变某个共享引用值。</p>
+<blockquote>
+<p>备注：你可能见过别人用 <code>.clone()</code> 来处理借用检查器的报错，然后就大喊“你看，Rust 还不是强迫我们做了保护性拷贝措施？”。我想说的是，这种代码基本都是由于程序员不熟悉生命周期机制，或者代码设计有问题导致的。</p>
+</blockquote>
+<h2>总结</h2>
+<p>本文并不能覆盖所有的最差实践，有些是因为我没亲身经历过，有些则是由于没法给出精简的例子。</p>
+<p>衷心地感谢回复我在 Rust 论坛发布的<a href="https://users.rust-lang.org/t/common-newbie-mistakes-or-bad-practices/64821/8">这个帖子</a>的各位同仁，尽管帖子的最后有点跑偏，各位 Rust 老鸟的论战还是让我受益颇深。</p>
+</div> <!----></div> <div class="footer" data-v-2c1886a6><div class="footer-content page" data-v-2c1886a6><div class="left" data-v-2c1886a6><div class="footer-title" data-v-2c1886a6>FRIEND LINKS</div> <div class="links footer-text" data-v-2c1886a6><a href="https://github.com/watercow/watercow.github.io/issues" class="link" data-v-2c1886a6>watercow</a><a href="https://ycjgg.github.io" class="link" data-v-2c1886a6>ycjgg</a><a href="https://blog.ch34k.xyz" class="link" data-v-2c1886a6>水厂博客</a></div> <div class="footer-text" data-v-2c1886a6><span id="busuanzi_container_site_pv" class="footer-count" data-v-2c1886a6><span id="busuanzi_value_site_pv" data-v-2c1886a6></span> <span id="busuanzi_value_site_uv" data-v-2c1886a6></span></span> <div class="counter" data-v-2c1886a6><div class="counter-title" data-v-2c1886a6>PAGE VIEWS</div> <div class="counter-content" data-v-2c1886a6><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span></div></div> <div class="counter" data-v-2c1886a6><div class="counter-title" data-v-2c1886a6>USER VIEWS</div> <div class="counter-content" data-v-2c1886a6><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span><span class="counter-number" data-v-2c1886a6>0</span></div></div></div> <div data-v-2c1886a6><div class="footer-title" data-v-2c1886a6>ABOUT</div> <div class="footer-text" data-v-2c1886a6>@ 蜀 ICP 备 19000509 号 - 1</div></div></div> <div class="right" data-v-2c1886a6><div class="footer-title power" data-v-2c1886a6>POWERED BY</div> <a href="https://github.com/Yidadaa/Issue-Blog-With-Github-Action" class="logo" data-v-2c1886a6>ISSUE BLOG</a></div></div></div></div></div></div><script defer src="/_nuxt/static/1645287466/posts/30/state.js"></script><script src="/_nuxt/dd67cf1.js" defer></script><script src="/_nuxt/edf9d0f.js" defer></script><script src="/_nuxt/82e603f.js" defer></script><script src="/_nuxt/b6b94c7.js" defer></script><script src="/_nuxt/756580a.js" defer></script>
+  </body>
+</html>
