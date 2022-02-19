@@ -22,6 +22,7 @@ let mainConfig = {
   description: "在这里了解我的一切，对编程的热爱永不停歇。",
   customDomain: "blog.simplenaive.cn",
   base: "/",
+  lang: "zh",
 
   slogan: {
     main: "有逻辑的灵魂，",
