@@ -41,7 +41,7 @@ let mainConfig = {
       },
       {
         name: "Resume",
-        link: "https://cdn.jsdelivr.net/gh/Yidadaa/Coding-Every-Day@master/2022/cv.pdf"
+        link: "/cv"
       }
     ],
     headTitle: ["暮春早夏的月亮", "原是情人的月亮，不比秋冬是诗人的月亮"],
