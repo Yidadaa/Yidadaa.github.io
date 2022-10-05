@@ -57,6 +57,14 @@ let mainConfig = {
       {
         name: "水厂博客",
         link: "https://blog.ch34k.xyz"
+      },
+      {
+        name: "滑稽仓库",
+        link: "https://www.huaji.store"
+      },
+      {
+        name: "无存在感小透明",
+        link: "https://ry.huaji.store"
       }
     ],
     extraFooters: [
