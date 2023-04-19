@@ -13,10 +13,10 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: Yidadaa/Issue-Blog-With-Github-Action
       - name: Build
