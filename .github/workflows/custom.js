@@ -4,18 +4,18 @@
 
 let mainConfig = {
   vssueConfig: {
-    owner: "Yidadaa",
-    repo: "Yidadaa.github.io",
-    clientId: "2783a4b752f56c0ed912",
-    clientSecret: "c8d9116fcade901567ff34aa1fb09216731683a3"
+    owner: "LianHua",
+    repo: "LianHua.github.io",
+    clientId: "4b03b15c993ac0c75319",
+    clientSecret: "b20044180530d2b17d01729ff2aeb55e0df903c5"
   },
 
   repoConfig: {
-    owner: "Yidadaa",
-    repo: "Yidadaa.github.io",
+    owner: "LianHua",
+    repo: "LianHua.github.io",
     pushBranch: "master",
-    email: "yidadaa@qq.com",
-    filterUsers: ["Yidadaa"],
+    email: "LianHua@qq.com",
+    filterUsers: ["LianHua"],
   },
 
   title: "YiFei Zhang's Blog",
@@ -37,7 +37,7 @@ let mainConfig = {
       },
       {
         name: "Github",
-        link: "https://github.com/Yidadaa"
+        link: "https://github.com/LianHua"
       },
       {
         name: "Resume",
